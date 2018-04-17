@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- Include the AngularJS library -->
+    <script src="js/shared/angular.1.3.5.min.js"></script>
+  </head>
+
+  <body ng-app="form" style="margin-left: 20px; margin-top: 20px;">
+
+    <div class="main" ng-controller="MainController" style="width: 50%;">
+
+      
+      <p>selected item is : {{selectedItem1}}</p>
+        <p> age of selected item is : {{selectedItem1.age}} </p>
+      <select ng-model="selectedItem1" ng-init="selectedItem1 = items_array_object[1]" ng-options="item.name for item in items_array_object">
+      </select>
+      <br>
+
+      <------------>
+      {{items1}}
+      <p> Selelected item.age as item.name for item in items : </p>{{model_item}}
+      <select ng-model="model_item" ng-options="item.age as item.name for item in items_array_object">
+      </select>
+      <br>
+      <------------>
+
+
+      <p>Items array of object: selected item is : {{selectedItem_array_object}}</p>
+      <select ng-model="selectedItem_array_object">
+        <option ng-repeat="item in items_array_object" value="{{item.age}}">{{item.name}}</option>
+      </select>
+      <br><br>
+
+      <p>selected item is : {{selectedItem}}</p>
+      <select ng-model="selectedItem">
+        <option ng-repeat="item in items" value="{{item}}">{{item}}</option>
+      </select>
+      <br><br>
+
+       <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate > 
+       <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+          <p>selected item is : {{selectedOption}}</p>
+          <select ng-model="selectedOption">
+            <option ng-repeat="item in formdata.items" value="{{item}}">{{item}}</option>
+          </select>
+
+
+          <!-- NAME -->
+          <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.uname.$pristine}">
+              <label>User Name</label>
+              <input type="text" name="uname" class="form-control" ng-model="testss" ng-required="true">
+              <p ng-show="userForm.uname.$invalid && !userForm.uname.$pristine" class="help-block">Your name is required.</p>
+          </div>
+          
+          <!-- EMAIL -->
+          <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" class="form-control" ng-model="fsds" ng-required="true">
+              <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+          </div>
+
+
+          <!-- Project Name -->
+          <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+              <label for="name">Project Name</label>
+              <input type="text" id="project_name" name="name" ng-model="formdata.name" class="form-control" ng-required="true">
+              <span class="help-block">Give it an easy to identify name. Most people enter the name of the building, community etc.</span>
+          </div>
+          <!-- Project Name -->
+
+          <!-- Area -->
+          <div class="form-group" ng-class="{ 'has-error' : userForm.gross_area.$invalid && !userForm.gross_area.$pristine}">
+              <label for="gross_area">Area</label>
+              <input type="text" id="gross_area" name="gross_area" ng-model="formdata.gross_area" class="form-control" ng-required="true">
+              <span class="help-block">Enter total built area</span>
+          </div>
+          <!-- Area -->
+                                          
+          
+          <!-- Address -->
+          <div class="form-group">
+              <label for="street">Address</label>
+              <input type="text" id="street" ng-model="formdata.street" class="form-control" ng-required="true"> <span class="help-block">Enter the project's address</span>
+          </div>
+          <!-- Address -->                                          
+
+          <!-- City -->
+          <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" ng-model="formdata.city" class="form-control" ng-required="true">
+          </div>
+          <!-- City -->      
+          
+          <!-- SUBMIT BUTTON -->
+          <button type="submit" class="btn btn-primary" ng-disabled="!userForm.$valid">Submit</button>
+          
+      </form> 
+
+     
+    </div>
+
+    <!-- Modules -->
+    <script src="js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/MainController.js"></script>
+  </body>
+</html>
